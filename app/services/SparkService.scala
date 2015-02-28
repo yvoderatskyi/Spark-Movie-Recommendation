@@ -1,6 +1,6 @@
 package services
 
-import models.User
+import models.{Movie, User}
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkContext._
 import org.apache.spark.SparkConf
@@ -13,12 +13,12 @@ object SparkService {
     val conf = new SparkConf(false)
       .setAppName(SparkConfig.appName)
       .setMaster(SparkConfig.master)
-    
+
       for((key,value) <- SparkConfig.configs) {
         conf.set(key, value)
       }
-    
-    new SparkContext(conf)    
+
+    new SparkContext(conf)
   }
 
   lazy val userRDD = {
@@ -27,6 +27,13 @@ object SparkService {
     users.cache()
     users
   }
-  
+
+  lazy val movieRDD = {
+    val input: RDD[String] = context.textFile(Configuration.root().getString("movie.file"))
+    val movies = input.map(Movie.fromString)
+    movies.cache()
+    movies
+  }
+
   def version = context.version
 }
