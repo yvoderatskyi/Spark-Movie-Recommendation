@@ -26,4 +26,11 @@ object Movie {
       .toList
       .find(m => m.id == id)
   }
+
+  def queryMovies(query: String): List[Movie] = {
+    SparkService.movieRDD
+      .filter(m => m.title.contains(query))
+      .collect()
+      .toList
+  }
 }
