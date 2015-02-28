@@ -1,6 +1,6 @@
 package services
 
-import models.{Movie, User}
+import models.{Rating, Movie, User}
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkContext._
 import org.apache.spark.SparkConf
@@ -22,8 +22,8 @@ object SparkService {
   }
 
   lazy val userRDD = {
-    val file: RDD[String] = context.textFile(Configuration.root().getString("user.file"))
-    val users = file.map(User.fromString)
+    val input: RDD[String] = context.textFile(Configuration.root().getString("user.file"))
+    val users = input.map(User.fromString)
     users.cache()
     users
   }
@@ -33,6 +33,13 @@ object SparkService {
     val movies = input.map(Movie.fromString)
     movies.cache()
     movies
+  }
+
+  lazy val ratingRDD = {
+    val input: RDD[String] = context.textFile(Configuration.root().getString("data.file"))
+    val ratings = input.map(Rating.fromString)
+    ratings.cache()
+    ratings
   }
 
   def version = context.version
