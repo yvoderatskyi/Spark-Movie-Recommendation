@@ -1,11 +1,31 @@
 package models
 
+import services.SparkService
+
 /**
  * Created by yuriy on 2/27/15.
  */
 
-case class User(id: Long, age: Short, gender: String, occupation: String, zipCode: Int)
+case class User(id: Long, age: Short, gender: String, occupation: String, zipCode: String) extends Serializable
 
-object User {
+object User extends Serializable {
+  def fromString(input: String) = input.split("\\|+") match {
+    case Array(id, age, gender, occ, zip) => User(id.toLong, age.toShort, gender, occ, zip)
+  }
 
+  lazy val users = SparkService.userRDD
+
+  def listUsers: List[User] = {
+    SparkService.userRDD
+      .sortBy(u => u.id)
+      .collect()
+      .toList
+  }
+
+  def getUserById(id: Long): Option[User] = {
+    SparkService.userRDD
+      .collect()
+      .toList
+      .find(user => user.id == id)
+  }
 }
