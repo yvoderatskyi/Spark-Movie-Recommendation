@@ -1,0 +1,23 @@
+@(movies: List[Movie])
+
+@main("List of movies"){
+    <div class="row">
+        <div class="list-group">
+        @for(movie <- movies) {
+            <div class="list-group-item">
+                <div class="row-action-primary">
+                    <i class="mdi-av-movie"></i>
+                </div>
+                <div class="row-content">
+                    <div class="least-content">@movie.prodDate</div>
+                    <h4 class="list-group-item-heading"><a href="@routes.MovieController.show(movie.id)">@movie.title</a></h4>
+                    <p class="list-group-item-text">
+                        <a class="btn btn-material-yellow btn-sm" href="@movie.link">IMDB</a>
+                    </p>
+                </div>
+            </div>
+            <div class="list-group-separator"></div>
+        }
+        </div>
+    </div>
+}

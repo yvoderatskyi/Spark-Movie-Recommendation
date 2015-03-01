@@ -33,7 +33,7 @@ object Movie {
 
   def queryMovies(query: String): List[Movie] = {
     SparkService.movieRDD
-      .filter(m => m.title.contains(query))
+      .filter(m => m.title.toLowerCase.contains(query.toLowerCase))
       .collect()
       .toList
   }
