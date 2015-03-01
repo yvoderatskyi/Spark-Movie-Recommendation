@@ -6,11 +6,11 @@ import services.SparkService
  * Created by yuriy on 2/27/15.
  */
 
-case class User(id: Long, age: Short, gender: String, occupation: String, zipCode: String) extends Serializable
+case class User(id: Int, age: Short, gender: String, occupation: String, zipCode: String) extends Serializable
 
 object User extends Serializable {
   def fromString(input: String) = input.split("\\|+") match {
-    case Array(id, age, gender, occ, zip) => User(id.toLong, age.toShort, gender, occ, zip)
+    case Array(id, age, gender, occ, zip) => User(id.toInt, age.toShort, gender, occ, zip)
   }
 
   lazy val users = SparkService.userRDD
