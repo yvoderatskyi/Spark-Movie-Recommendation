@@ -4,12 +4,13 @@ import models.{Rating, Movie, User}
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkContext._
 import org.apache.spark.SparkConf
+import org.apache.spark.mllib.recommendation.ALS
 import org.apache.spark.rdd.RDD
 
 import play.Configuration
 
 object SparkService {
-  private lazy val context = {
+  lazy val context = {
     val conf = new SparkConf(false)
       .setAppName(SparkConfig.appName)
       .setMaster(SparkConfig.master)
@@ -42,5 +43,12 @@ object SparkService {
     ratings
   }
 
-  def version = context.version
+  lazy val factorizationModel = {
+    val rank = 10
+    val numIterations = 20
+    ALS.train(ratingRDD, rank, numIterations, 0.01)
+  }
+
+  lazy val version = context.version
+
 }
