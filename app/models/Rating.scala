@@ -18,9 +18,14 @@ object Rating extends Serializable {
         .toList
   }
   
-  def getRatingsByUser(user: User): List[recommendation.Rating] = {
-    SparkService.ratingRDD
+  def getRatingsByUser(user: User): List[(Double, Movie)] = {
+    val userRatings: RDD[recommendation.Rating] = SparkService.ratingRDD
       .filter(r => r.user == user.id)
+    val ratingIDs = userRatings.map(r => (r.product, r.rating))
+    val moviesIDs: RDD[(Int, Movie)] = SparkService.movieRDD.keyBy(m => m.id)
+    val joined: RDD[(Int, (Double, Movie))] = ratingIDs.join(moviesIDs)
+    joined
+      .values
       .collect()
       .toList
   }

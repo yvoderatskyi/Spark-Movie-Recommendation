@@ -1,0 +1,69 @@
+@(user: User, ratedMovies: List[(Double, Movie)], predictedMovies: List[Movie])
+
+@main("User details"){
+
+    <div class="row">
+        <div class="panel panel-success">
+            <div class="panel-heading text-center"><h5>User Details</h5></div>
+            <div class="panel-body">
+                <dl class="dl-horizontal">
+                    <dt>Id</dt>
+                    <dd>@user.id</dd>
+                    <dt>Age</dt>
+                    <dd>@user.age</dd>
+                    <dt>Gender</dt>
+                    <dd>@user.gender</dd>
+                    <dt>Occupation</dt>
+                    <dd>@user.occupation</dd>
+                    <dt>Zip code</dt>
+                    <dd><a href="@Html(s"http://www.zip-codes.com/zip-code/${user.zipCode}/zip-code-${user.zipCode}.asp")">Show on map</a></dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @*Rated movies*@
+        <div class="col-lg-6">
+            <h5>Rated movies</h5>
+            <div class="list-group">
+            @for((rating, movie) <- ratedMovies) {
+                <div class="list-group-item">
+                    <div class="row-action-primary">
+                        <i class="mdi-av-movie"></i>
+                    </div>
+                    <div class="row-content">
+                        <div class="least-content">@movie.prodDate</div>
+                        <h4 class="list-group-item-heading"><a href="@routes.MovieController.show(movie.id)">@movie.title</a></h4>
+                        <div class="list-group-item-text">
+                            <p>Rating: @rating</p>
+                            <a class="btn btn-material-yellow btn-sm" href="@movie.link">IMDB</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-separator"></div>
+            }
+            </div>
+        </div>
+        @*Predicted movies*@
+        <div class="col-lg-6">
+            <h5>Predicted movies</h5>
+            <div class="list-group">
+            @for(movie <- predictedMovies) {
+                <div class="list-group-item">
+                    <div class="row-action-primary">
+                        <i class="mdi-av-movie"></i>
+                    </div>
+                    <div class="row-content">
+                        <div class="least-content">@movie.prodDate</div>
+                        <h4 class="list-group-item-heading"><a href="@routes.MovieController.show(movie.id)">@movie.title</a></h4>
+                        <p class="list-group-item-text">
+                            <a class="btn btn-material-yellow btn-sm" href="@movie.link">IMDB</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="list-group-separator"></div>
+            }
+            </div>
+        </div>
+    </div>
+}

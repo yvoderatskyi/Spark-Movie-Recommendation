@@ -1,7 +1,7 @@
 @import org.apache.spark.mllib.recommendation.Rating
 @(movie: Movie, ratings: List[Rating])
 
-@main("List of movies"){
+@main("Movie details"){
 
     <div class="row">
         <div class="panel panel-success">
@@ -28,7 +28,7 @@
                     <i class="mdi-social-person"></i>
                 </div>
                 <div class="row-content">
-                    <h4 class="list-group-item-heading"><a href="#">User @rating.user</a></h4>
+                    <h4 class="list-group-item-heading"><a href="@routes.UserController.show(rating.user)">User @rating.user</a></h4>
                     <p class="list-group-item-text">
                         Rating @rating.rating
                     </p>

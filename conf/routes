@@ -2,16 +2,18 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
+# Index
 GET        /                     controllers.Application.index
+
+# Movies
 GET        /movies               controllers.MovieController.list
-GET        /movies/:id           controllers.MovieController.show(id: Int)
+GET        /movie/:id           controllers.MovieController.show(id: Int)
 GET        /movies/top           controllers.MovieController.top
 GET        /movies/search        controllers.MovieController.search
 
-
-
-
+# Users
+GET        /users                controllers.UserController.list
+GET        /user/:id             controllers.UserController.show(id: Int)
 
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file         controllers.Assets.at(path="/public", file)

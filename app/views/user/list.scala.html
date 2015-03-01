@@ -1,0 +1,25 @@
+@(users: List[User])
+
+@main("List of users"){
+    <div class="row" xmlns="http://www.w3.org/1999/html">
+        <div class="list-group">
+        @for(user <- users) {
+            <div class="list-group-item">
+                <div class="row-action-primary">
+                    <i class="mdi-social-person"></i>
+                </div>
+                <div class="row-content">
+                    <h4 class="list-group-item-heading"><a href="@routes.UserController.show(user.id)">User @user.id </a></h4>
+                    <p class="list-group-item-text">
+                        <strong>Gender</strong> @user.gender <br/>
+                        <strong>Age</strong> @user.age <br/>
+                        <strong>Occupation</strong> @user.occupation <br/>
+                        <strong>Zip</strong> @user.zipCode <br/>
+                    </p>
+                </div>
+            </div>
+            <div class="list-group-separator"></div>
+        }
+        </div>
+    </div>
+}
