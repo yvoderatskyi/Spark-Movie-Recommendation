@@ -5,7 +5,7 @@ import services.SparkService
 
 object Rating extends Serializable {
   def fromString(input: String): recommendation.Rating = input.split("\\s+") match {
-    case Array(userId, movieId, rating) => recommendation.Rating(userId.toInt, movieId.toInt, rating.toDouble)
+    case Array(userId, movieId, rating, timestamp) => recommendation.Rating(userId.toInt, movieId.toInt, rating.toDouble)
   }
   
   def listRatings: List[recommendation.Rating] = {
