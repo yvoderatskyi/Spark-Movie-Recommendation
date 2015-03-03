@@ -7,7 +7,7 @@ GET        /                     controllers.Application.index
 
 # Movies
 GET        /movies               controllers.MovieController.list
-GET        /movie/:id           controllers.MovieController.show(id: Int)
+GET        /movie/:id            controllers.MovieController.show(id: Int)
 GET        /movies/top           controllers.MovieController.top
 GET        /movies/search        controllers.MovieController.search
 
