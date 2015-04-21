@@ -6,9 +6,8 @@
     <head>
         <title>@title</title>
         <link href="@routes.Assets.at("images/favicon.png")" rel="shortcut icon" type="image/png">
-        <link href="@routes.Assets.at("css/bootstrap.min.css")" rel="stylesheet">
-        <link href="@routes.Assets.at("css/ripples.min.css")" rel="stylesheet">
-        <link href="@routes.Assets.at("css/material-wfont.min.css")" rel="stylesheet">
+        <link rel="stylesheet" media="screen" href="@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap", "bootstrap.min.css"))">
+        <link rel="stylesheet" media="screen" href="@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap", "bootstrap-theme.min.css"))">
     </head>
     <body>
         <div class="navbar navbar-inverse">
@@ -31,18 +30,12 @@
                 </form>
             </div>
         </div>
+
         <div class="container">
             @content
         </div>
-    <script src="@routes.Assets.at("js/jquery-1.10.2.min.js")"></script>
-    <script src="@routes.Assets.at("js/bootstrap.min.js")"></script>
 
-    <script src="@routes.Assets.at("js/ripples.min.js")"></script>
-    <script src="@routes.Assets.at("js/material.min.js")"></script>
-    <script>
-        $(document).ready(function() {
-            $.material.init();
-        });
-    </script>
+        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))"></script>
+        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap", "bootstrap.min.js"))"></script>
     </body>
 </html>
