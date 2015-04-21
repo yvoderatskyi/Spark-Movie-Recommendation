@@ -3,7 +3,6 @@ package services
 import models._
 import org.apache.spark.mllib.recommendation
 import org.apache.spark.rdd.RDD
-import services.SparkService
 import org.apache.spark.SparkContext._
 import services.SparkService._
 
@@ -58,5 +57,6 @@ object MovieService {
     recommendedById.join(movieById) //RDD[(movieID, (Rating, Movie))]
       .map(_._2._2) //RDD[Movie]
       .take(amount)
+      .toList
   }
 }
