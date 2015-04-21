@@ -11,6 +11,7 @@ import org.apache.spark.rdd.RDD
 
 import play.api._
 import play.api.Play.current
+import utils.SparkConfig
 
 object SparkService {
   lazy val context = {

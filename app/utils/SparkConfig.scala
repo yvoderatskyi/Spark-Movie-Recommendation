@@ -1,10 +1,7 @@
-package services
+package utils
 
 import play.Configuration
 
-/**
- * Created by yuriy on 2/27/15.
- */
 object SparkConfig extends Serializable {
   private val conf = Configuration.root()
 
