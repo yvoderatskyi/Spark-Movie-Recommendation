@@ -1,18 +1,22 @@
 package controllers
 
-import models.{Movie, Rating, User}
 import play.api.mvc._
+import services._
 
 object UserController extends Controller {
   def list() = Action {
-    Ok(views.html.user.list(User.listUsers))
+    Ok(views.html.user.list(UserService.listUsers))
   }
 
   def show(id: Int) = Action {
-    User.getUserById(id.toLong) match {
+    UserService.getUserById(id.toLong) match {
       case Some(user) =>
-        Ok(views.html.user.show(user, Rating.getRatingsByUser(user), Movie.recommendMovies(user)))
-      case _ => Redirect(routes.UserController.list())
+        Ok(views.html.user.show(
+          user,
+          RatingService.getRatingsByUser(user),
+          MovieService.recommendMovies(user)))
+      case _ =>
+        Redirect(routes.UserController.list())
     }
   }
 }
