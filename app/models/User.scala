@@ -9,7 +9,7 @@ case class User(
 ) extends Serializable
 
 object User extends Serializable {
-  def fromString(input: String) = input.split("\\|+") match {
+  def apply(input: String): User = input.split("\\|+") match {
     case Array(id, age, gender, occ, zip) =>
       User(
         id.toInt,

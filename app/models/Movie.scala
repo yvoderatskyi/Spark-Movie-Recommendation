@@ -8,7 +8,7 @@ case class Movie(
 ) extends Serializable
 
 object Movie {
-  def fromString(input: String) = input.split("\\|+").take(4) match {
+  def apply(input: String): Movie = input.split("\\|+").take(4) match {
     case Array(id, title, date, link) => Movie(id.toInt, title, date, link)
   }
 }

@@ -34,21 +34,21 @@ object SparkService {
 
   lazy val userRDD = {
     val input: RDD[String] = context.textFile(getData("u.user"))
-    val users = input.map(User.fromString)
+    val users = input.map(User(_))
     users.cache()
     users
   }
 
   lazy val movieRDD = {
     val input: RDD[String] = context.textFile(getData("u.item"))
-    val movies = input.map(Movie.fromString)
+    val movies = input.map(Movie(_))
     movies.cache()
     movies
   }
 
   lazy val ratingRDD = {
     val input: RDD[String] = context.textFile(getData("u.data"))
-    val ratings = input.map(Rating.fromString)
+    val ratings = input.map(Rating(_))
     ratings.cache()
     ratings
   }
