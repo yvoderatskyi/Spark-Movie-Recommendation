@@ -1,6 +1,6 @@
 package models
 
-import org.apache.spark.mllib._
+import org.apache.spark.mllib.recommendation
 
 object Rating extends Serializable {
   def apply(input: String): recommendation.Rating = input.split("\\s+") match {
@@ -11,3 +11,5 @@ object Rating extends Serializable {
         rating.toDouble)
   }
 }
+
+

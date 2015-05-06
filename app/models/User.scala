@@ -2,7 +2,7 @@ package models
 
 case class User(
   id: Int,
-  age: Short,
+  age: Int,
   gender: String,
   occupation: String,
   zipCode: String
@@ -13,7 +13,7 @@ object User extends Serializable {
     case Array(id, age, gender, occ, zip) =>
       User(
         id.toInt,
-        age.toShort,
+        age.toInt,
         gender,
         occ,
         zip)
