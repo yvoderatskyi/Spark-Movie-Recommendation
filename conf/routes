@@ -3,19 +3,20 @@
 # ~~~~
 
 # Index
-GET        /                     controllers.Application.index
+GET        /                         controllers.Application.index
 
 # Movies
-GET        /movies               controllers.MovieController.list
-GET        /movies/top           controllers.MovieController.top
-GET        /movies/search        controllers.MovieController.search
-GET        /movies/:id           controllers.MovieController.show(id: Int)
+GET        /movies                   controllers.MovieController.listMovies(page: Int = 1)
+GET        /movies/top               controllers.MovieController.top
+GET        /movies/search            controllers.MovieController.search
+GET        /movies/:id               controllers.MovieController.show(id: Int)
+GET        /movies/page/:page        controllers.MovieController.listMovies(page: Int)
 
 # Users
-GET        /users                controllers.UserController.list
-GET        /users/:id            controllers.UserController.show(id: Int)
+GET        /users                    controllers.UserController.list
+GET        /users/:id                controllers.UserController.show(id: Int)
 
 # Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file         controllers.Assets.at(path="/public", file)
+GET        /assets/*file             controllers.Assets.at(path="/public", file)
 # WebJars
-GET        /webjars/*file        controllers.WebJarAssets.at(file)
+GET        /webjars/*file            controllers.WebJarAssets.at(file)

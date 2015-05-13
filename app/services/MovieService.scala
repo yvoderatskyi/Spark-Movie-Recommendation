@@ -10,11 +10,21 @@ import services.SparkService._
  * Created by yuriy on 4/21/15.
  */
 object MovieService {
-  def listMovies: List[Movie] = {
-    SparkService.movieRDD
-      .sortBy(m => m.id)
-      .collect()
+  def listMovies(pageNum: Int, size: Int): Page[Movie] = {
+    val from = (pageNum - 1) * size
+    val to = pageNum * size - 1
+    val movies = SparkService
+      .movieRDD
+      .zipWithIndex
+      .filter(_._2 >= from)
+      .filter(_._2 <= to)
+      .map(_._1)
+      .collect
       .toList
+    val total: Int = movies.size / size
+    val prev = pageNum > 1
+    val next = pageNum <= total
+    Page(movies, pageNum, size, total, prev, next)
   }
 
   def getMovieById(id: Long): Option[Movie] = {

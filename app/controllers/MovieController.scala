@@ -11,8 +11,10 @@ object MovieController extends Controller {
     "query" -> nonEmptyText
   )
 
-  def list = Action {
-    Ok(views.html.movie.list(MovieService.listMovies))
+  def listMovies(page: Int, size: Int = 10) = Action {
+    Ok(
+      views.html.movie.list(
+        MovieService.listMovies(page, size)))
   }
 
   def search = Action { implicit request =>
@@ -34,7 +36,7 @@ object MovieController extends Controller {
         Ok(views.html.movie.show(
           movie,
           RatingService.getRatingsByMovie(movie)))
-      case _ => Redirect(routes.MovieController.list())
+      case _ => Redirect(routes.MovieController.listMovies())
     }
   }
 }
