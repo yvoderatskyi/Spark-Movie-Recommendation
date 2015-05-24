@@ -1,0 +1,20 @@
+<div ng-controller="RatingForUserCtrl">
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th> ID </th>
+            <th> Title </th>
+            <th> Production Date </th>
+            <th> Rating </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="rating in ratings | filter: query | orderBy : 'rating' : true" ng-click="show(rating.movieId)">
+            <td>{{ rating.movieId }}</td>
+            <td>{{ rating.title }}</td>
+            <td>{{ rating.prodDate }}</td>
+            <td>{{ rating.rating }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

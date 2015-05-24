@@ -45,7 +45,7 @@ object MovieService {
       .toList
   }
 
-  def recommendMovies(user: User, amount: Int = 20): List[Movie] = {
+  def recommendMovies(user: User, amount: Int = 20): List[(Double, Movie)] = {
     val recommended = SparkService.factorizationModel
       .recommendProducts(user.id, amount)
 
@@ -55,7 +55,8 @@ object MovieService {
     val movieById: RDD[(Int, Movie)] = SparkService.movieRDD.keyBy(m => m.id)
 
     recommendedById.join(movieById) //RDD[(movieID, (Rating, Movie))]
-      .map(_._2._2) //RDD[Movie]
+      .map(t => (t._2._1.rating, t._2._2)) //RDD[Movie]
+      .sortBy(-_._1)
       .take(amount)
       .toList
   }

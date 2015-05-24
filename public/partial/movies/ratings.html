@@ -1,0 +1,16 @@
+<div ng-controller="RatingForMovieCtrl">
+    <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+            <th> User ID </th>
+            <th> Rating </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="rating in ratings | filter: query | orderBy : 'rating' : true">
+            <td>{{ rating.userId }}</td>
+            <td>{{ rating.rating }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

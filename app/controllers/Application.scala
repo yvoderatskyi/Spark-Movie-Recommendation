@@ -5,7 +5,7 @@ import play.api.mvc._
 
 object Application extends Controller {
 
-  def index = Action {
-    Redirect(routes.MovieController.list())
+  def index(any: String) = Action {
+    Ok(views.html.main())
   }
 }

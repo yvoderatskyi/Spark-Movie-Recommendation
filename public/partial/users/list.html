@@ -1,0 +1,40 @@
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr>
+            <th ng-click="sort('id')">
+                ID
+                <span ng-show="sort.field === 'id' && !sort.order" class="glyphicon glyphicon-chevron-down"></span>
+                <span ng-show="sort.field === 'id' && sort.order" class="glyphicon glyphicon-chevron-up"></span>
+            </th>
+            <th ng-click="sort('age')">
+                Age
+                <span ng-show="sort.field === 'age' && !sort.order" class="glyphicon glyphicon-chevron-down"></span>
+                <span ng-show="sort.field === 'age' && sort.order" class="glyphicon glyphicon-chevron-up"></span>
+            </th>
+            <th ng-click="sort('gender')">
+                Gender
+                <span ng-show="sort.field === 'gender' && !sort.order" class="glyphicon glyphicon-chevron-down"></span>
+                <span ng-show="sort.field === 'gender' && sort.order" class="glyphicon glyphicon-chevron-up"></span>
+            </th>
+            <th ng-click="sort('occupation')">
+                Occupation
+                <span ng-show="sort.field === 'occupation' && !sort.order" class="glyphicon glyphicon-chevron-down"></span>
+                <span ng-show="sort.field === 'occupation' && sort.order" class="glyphicon glyphicon-chevron-up"></span>
+            </th>
+            <th ng-click="sort('zipCode')">
+                Zip Code
+                <span ng-show="sort.field === 'zipCode' && !sort.order" class="glyphicon glyphicon-chevron-down"></span>
+                <span ng-show="sort.field === 'zipCode' && sort.order" class="glyphicon glyphicon-chevron-up"></span>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="user in users | filter: query | orderBy : sort.field : sort.order" ng-click="show(user.id)">
+            <td>{{ user.id }}</td>
+            <td>{{ user.age }}</td>
+            <td>{{ user.gender }}</td>
+            <td>{{ user.occupation }}</td>
+            <td>{{ user.zipCode }}</td>
+        </tr>
+    </tbody>
+</table>

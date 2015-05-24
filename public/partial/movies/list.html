@@ -1,0 +1,24 @@
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr>
+            <th ng-click="sort('id')">
+                ID
+                <span ng-show="sort.field === 'id' && !sort.order" class="glyphicon glyphicon-chevron-down"></span>
+                <span ng-show="sort.field === 'id' && sort.order" class="glyphicon glyphicon-chevron-up"></span>
+            </th>
+            <th ng-click="sort('title')">
+                Title
+                <span ng-show="sort.field === 'title' && !sort.order" class="glyphicon glyphicon-chevron-down"></span>
+                <span ng-show="sort.field === 'title' && sort.order" class="glyphicon glyphicon-chevron-up"></span>
+            </th>
+            <th>Release Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="movie in movies | filter: query | orderBy : sort.field : sort.order" ng-click="show(movie.id)">
+            <td>{{ movie.id }}</td>
+            <td>{{ movie.title | cleanTitle }}</td>
+            <td>{{ movie.prodDate }}</td>
+        </tr>
+    </tbody>
+</table>

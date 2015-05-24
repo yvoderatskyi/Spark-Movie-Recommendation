@@ -1,10 +1,8 @@
-@(title: String)(content: Html)
-
 <!DOCTYPE html>
 
 <html ng-app="MoviesApp">
     <head>
-        <title>@title</title>
+        <title> Movie Recommendations </title>
         <link href="@routes.Assets.at("images/favicon.png")" rel="shortcut icon" type="image/png">
         <link rel="stylesheet" media="screen" href="@routes.WebJarAssets.at(WebJarAssets.locate("bootswatch-journal", "bootstrap.min.css"))">
         <link rel="stylesheet" media="screen" href="@routes.WebJarAssets.at(WebJarAssets.locate("bootswatch-journal", "bootstrap-theme.min.css"))">
@@ -21,24 +19,26 @@
             </div>
             <div class="navbar-collapse collapse navbar-inverse-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="@routes.MovieController.list()">Movies</a></li>
-                    <li><a href="@routes.MovieController.top()">Top Movies</a></li>
-                    <li><a href="@routes.UserController.list()">Users</a></li>
+                    <li ng-class='{ active: PAGE === "movies-all" }'><a href="/movies">Movies</a></li>
+                    <li ng-class='{ active: PAGE === "movies-top" }'><a href="/popular">Popular Movies</a></li>
+                    <li ng-class='{ active: PAGE === "users-all" }'><a href="/users">Users</a></li>
                 </ul>
-                <form class="navbar-form navbar-right" action="@routes.MovieController.search()" method="GET">
+                <form ng-hide="PAGE === 'movies-details' || PAGE === 'users-details'" class="navbar-form navbar-right" method="GET">
                     <input class="form-control col-lg-8" placeholder="Search" type="text" name="query" ng-model="query">
                 </form>
             </div>
         </div>
 
         <div class="container" ng-view></div>
-        @content
 
         <script src="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))"></script>
         <script src="@routes.WebJarAssets.at(WebJarAssets.locate("bootswatch-journal", "bootstrap.min.js"))"></script>
         <script src="@routes.WebJarAssets.at(WebJarAssets.locate("angular.min.js"))"></script>
+        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-route.min.js"))"></script>
+        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-resource.min.js"))"></script>
         <script src="@routes.Assets.at("javascripts/app.js")"></script>
         <script src="@routes.Assets.at("javascripts/controllers.js")"></script>
         <script src="@routes.Assets.at("javascripts/factories.js")"></script>
+        <script src="@routes.Assets.at("javascripts/filters.js")"></script>
     </body>
 </html>
