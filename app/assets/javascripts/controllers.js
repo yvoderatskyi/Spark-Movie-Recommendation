@@ -67,13 +67,13 @@ angular.module('MoviesApp')
             $location.url('/movies/' + id);
         };
     })
-    .controller("RatingForMovieCtrl", function ($scope, $location, RatingsForMovie) {
+    .controller("RatingForMovieCtrl", function ($scope, $location, Ratings) {
         var id = $location.path().split('/')[2];
-        $scope.ratings = RatingsForMovie.query({ id: id });
+        $scope.ratings = Ratings.forMovie({ id: id});
     })
-    .controller("RatingForUserCtrl", function ($scope, $location, RatingsForUser) {
+    .controller("RatingForUserCtrl", function ($scope, $location, Ratings) {
         var id = $location.path().split('/')[2];
-        $scope.ratings = RatingsForUser.query({ id: id });
+        $scope.ratings = Ratings.forUser({ id: id});
         $scope.show = function (id) {
             $location.url('/movies/' + id);
         };
