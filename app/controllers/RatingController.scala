@@ -43,4 +43,13 @@ object RatingController extends Controller {
       case _ => NotFound(s"User with id $id not found")
     }
   }
+
+  def recommendMovies(id: String) = Action {
+    UserService.getUserById(id.toLong) match {
+      case Some(user: User) =>
+        val movies = MovieService.recommendMovies(user)
+        Ok(Json.toJson(movies))
+      case _ => NotFound(s"User with id $id not found")
+    }
+  }
 }

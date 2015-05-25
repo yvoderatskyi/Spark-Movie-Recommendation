@@ -21,10 +21,10 @@ angular.module('MoviesApp')
 
         $scope.movie = Movies.get({ id: $routeParams.id });
     })
-    .controller("MoviesTopCtrl", function ($scope, $rootScope, $location, TopMovies) {
+    .controller("MoviesTopCtrl", function ($scope, $rootScope, $location, Movies) {
         $rootScope.PAGE = "movies-top";
 
-        $scope.movies = TopMovies.query();
+        $scope.movies = Movies.top();
 
         $scope.sort = function (field) {
             $scope.sort.field = field;
@@ -60,9 +60,9 @@ angular.module('MoviesApp')
 
         $scope.user = Users.get({ id: $routeParams.id });
     })
-    .controller("RecommendationsForUserCtrl", function ($scope, $location, RecommendationsForUser) {
+    .controller("RecommendationsForUserCtrl", function ($scope, $location, Ratings) {
         var id = $location.path().split('/')[2];
-        $scope.ratings = RecommendationsForUser.query({ id: id });
+        $scope.ratings = Ratings.recommended({ id: id });
         $scope.show = function (id) {
             $location.url('/movies/' + id);
         };

@@ -1,21 +1,17 @@
 angular.module('MoviesApp')
     .factory('Movies', function ($resource) {
         return $resource('/api/movies/:id', {id: '@id'}, {
-            'update': {method: 'PUT'}
-        });
-    })
-    .factory('TopMovies', function ($resource) {
-        return $resource('/api/movies/top/:id', {id: '@id'}, {
-            'update': {method: 'PUT'}
+            top: {
+                method: "GET",
+                isArray: true,
+                params: {
+                    id: "top"
+                }
+            }
         });
     })
     .factory('Users', function ($resource) {
-        return $resource('/api/users/:id', {id: '@id'}, {
-            'update': {method: 'PUT'}
-        });
-    })
-    .factory('RecommendationsForUser', function ($resource) {
-        return $resource('/api/recommend/:id', {id: '@id'});
+        return $resource('/api/users/:id', {id: '@id'});
     })
     .factory('Ratings', function ($resource) {
         return $resource('/api/ratings/:controller/:id',
@@ -36,6 +32,13 @@ angular.module('MoviesApp')
                     isArray: true,
                     params: {
                         controller: "movie"
+                    }
+                },
+                recommended: {
+                    method: "GET",
+                    isArray: true,
+                    params: {
+                        controller: "recommendation"
                     }
                 }
             }
