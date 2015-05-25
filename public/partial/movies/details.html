@@ -1,2 +1,13 @@
-<h2> Ratings for movie "{{ movie.title | cleanTitle }}" </h2>
-<div ng-include='"/assets/partial/movies/ratings.html"'></div>
+<div class="row">
+    <div class="row">
+        <div class="col-sm-12 text-center"> <h2>{{ movie.title | cleanTitle }}</h2></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 text-center"><strong>Production date:</strong> {{ movie.prodDate }}</div>
+        <div class="col-sm-6 text-center"><strong>Link:</strong> <a href="{{movie.link}}"> IMDB </a></div>
+    </div>
+</div>
+<div class="row">
+    <h3> Ratings </h3>
+    <div ng-include='"/assets/partial/movies/ratings.html"'></div>
+</div>
